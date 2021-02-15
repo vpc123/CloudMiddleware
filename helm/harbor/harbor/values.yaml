@@ -198,19 +198,19 @@ persistence:
       # Specify the "storageClass" used to provision the volume. Or the default
       # StorageClass will be used(the default).
       # Set it to "-" to disable dynamic provisioning
-      storageClass: ""
+      storageClass: "rook-ceph-block"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
     chartmuseum:
       existingClaim: ""
-      storageClass: ""
+      storageClass: "rook-ceph-block"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
     jobservice:
       existingClaim: ""
-      storageClass: ""
+      storageClass: "rook-ceph-block"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 1Gi
@@ -218,7 +218,7 @@ persistence:
     # be ignored
     database:
       existingClaim: ""
-      storageClass: ""
+      storageClass: "rook-ceph-block"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 1Gi
@@ -226,13 +226,13 @@ persistence:
     # be ignored
     redis:
       existingClaim: ""
-      storageClass: ""
+      storageClass: "rook-ceph-block"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 1Gi
     trivy:
       existingClaim: ""
-      storageClass: ""
+      storageClass: "rook-ceph-block"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
