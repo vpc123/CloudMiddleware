@@ -133,7 +133,7 @@ Persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  # StorageClass: "-"
+  StorageClass: "rook-ceph-block"
 
   Annotations: {}
   AccessMode: ReadWriteOnce
