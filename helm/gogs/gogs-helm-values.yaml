@@ -1,0 +1,23 @@
+service:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: traefik
+    hosts:
+      - gogs.kakj.com
+  gogs:
+    # serverDomain: gogs.load.com
+    serverRootUrl: http://gogs.kakj.com/
+
+persistence:
+  enabled: true
+  storageClass: "rook-ceph-block"
+  accessMode: ReadWriteOnce
+  size: 2Gi
+
+postgresql:
+  persistence:
+    enabled: true
+    storageClass: "rook-ceph-block"
+    accessMode: ReadWriteOnce
+    size: 2Gi

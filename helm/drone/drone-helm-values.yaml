@@ -1,0 +1,35 @@
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  hosts:
+    - drone.kak.com
+
+sourceControl:
+  provider: gogs
+  gogs:
+    server: http://gogs.kakj.com
+#  github:
+#    clientID: 9f949ade4dce277e559b
+#    clientSecretKey: clientSecret
+#    clientSecretValue: 7dc3e96e973b6d07446d58b424ece3949fbadabb
+#    server: http://github.com
+
+service:
+  httpPort: 8082
+
+server:
+  adminUser: kakj-go
+  ## Configures drone to use kubernetes to run pipelines rather than agents, if enabled
+  ## will not deploy any agents.
+  kubernetes:
+    ## set to true if you want drone to use kubernetes to run pipelines
+    enabled: true
+  host: drone.kak.com
+  protocol: http
+
+persistence:
+  enabled: true
+  storageClass: "rook-ceph-block"
+
+sharedSecret: c7634c78eda8891d1d11d5f1f64e6753
