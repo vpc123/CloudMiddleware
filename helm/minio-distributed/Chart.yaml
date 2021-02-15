@@ -1,0 +1,5 @@
+apiVersion: v1
+description: A Helm chart for minio-distributed minio
+name: minio-distributed
+version: 0.0.1
+appVersion: 0.0.1

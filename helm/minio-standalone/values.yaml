@@ -1,0 +1,35 @@
+replicas: 1
+strategy: Recreate
+resources:
+  limits:
+    cpu: "1"
+    memory: 1Gi
+  requests:
+    cpu: 200m
+    memory: 200Mi
+
+pv:
+  name: minio
+  accessModes: ReadWriteOnce
+  storage: 20Gi
+
+pvc:
+  name: minio-pv-claim
+
+service:
+  name: minio-service
+
+ingress:
+  name: minio-ingress
+  host: traefik.minio-minio-standalone.io
+
+# 请不要轻易修改此配置
+global:
+  namespace: minio-ns
+  minio:
+    name: minio-ds
+    username: amdin123
+    password: admin123
+    image: minio/minio
+    tag: RELEASE.2021-01-30T00-20-58Z
+    port: 9000

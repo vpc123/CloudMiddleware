@@ -1,0 +1,30 @@
+replicas: 4
+strategy: Recreate
+resources:
+  limits:
+    cpu: "1"
+    memory: 1Gi
+  requests:
+    cpu: 200m
+    memory: 200Mi
+
+pv:
+  accessModes: ReadWriteOnce
+  storage: 5Gi
+
+service:
+  name: minio-service
+  nodeport: minio-node
+
+ingress:
+  name: minio-ingress
+  host: traefik.minio-distributed.io
+
+# 请不要轻易修改此配置
+global:
+  namespace: minio-ss
+  minio:
+    name: minio-ss
+    image: minio/minio
+    tag: latest
+    port: 9000

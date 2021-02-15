@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  labels:
+    app: {{ .Values.pv.name }}
+    release: {{ .Values.pv.name }}
+  name: {{ .Values.pv.name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+  - {{ .Values.pv.accessModes }}
+  capacity:
+    storage: {{ .Values.pv.storage }}
+  volumeMode: Filesystem
+  hostPath:
+    path: /mnt/minio

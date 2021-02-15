@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ .Values.global.nginx.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.global.nginx.name }}
+  replicas: {{ .Values.global.nginx.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.nginx.name }}
+    spec:
+      containers:
+      - name: {{ .Values.global.nginx.name }}
+        image: "{{ .Values.global.nginx.image }}:{{ .Values.global.nginx.tag }}"
+        ports:
+        - containerPort: {{ .Values.global.nginx.port }}
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.global.minio.name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  serviceName: {{ .Values.service.name }}
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.global.minio.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.minio.name }}
+    spec:
+      containers:
+      - name: {{ .Values.global.minio.name }}
+        env:
+        - name: MINIO_ACCESS_KEY
+          value: "admin123"
+        - name: MINIO_SECRET_KEY
+          value: "admin123"
+        image: "{{ .Values.global.minio.image }}:{{ .Values.global.minio.tag }}"
+        args:
+        - server
+        - http://minio-{0...3}.minio.default.svc.cluster.local/data
+        ports:
+        - containerPort: {{ .Values.global.minio.port }}
+        # These volume mounts are persistent. Each pod in the PetSet
+        # gets a volume mounted based on this field.
+        volumeMounts:
+        - name: data
+          mountPath: /data
+  # These are converted to volume claims by the controller
+  # and mounted at the paths mentioned above.
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes:
+        - {{ .Values.pv.accessModes }}
+      resources:
+        requests:
+          storage: {{ .Values.pv.storage }}
+      # Uncomment and add storageClass specific to your requirements below. Read more https://kubernetes.io/docs/concepts/storage/persistent-volumes/#class-1
+      #storageClassName:

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.service.name }}
+spec:
+  clusterIP: None
+  ports:
+    - port: {{ .Values.global.minio.port }}
+      name: {{ .Values.service.name }}
+  selector:
+    app: {{ .Values.global.minio.name }}

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ .Values.global.minio.name }}
+spec:
+  strategy:
+    type: {{ .Values.strategy }}
+  selector:
+    matchLabels:
+      app: {{ .Values.global.minio.name }}
+  template:
+    metadata:
+      labels:
+        # Label is used as selector in the service.
+        app: {{ .Values.global.minio.name }}
+    spec:
+      # Refer to the PVC created earlier
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          # Name of the PVC created earlier
+          claimName: {{ .Values.pvc.name }}
+      containers:
+      - name: {{ .Values.global.minio.name }}
+        # Pulls the default MinIO image from Docker Hub
+        image: "{{ .Values.global.minio.image }}:{{ .Values.global.minio.tag }}"
+        args:
+        - server
+        - /storage
+        env:
+        # MinIO access key and secret key
+        - name: MINIO_ACCESS_KEY
+          value: admin123
+        - name: MINIO_SECRET_KEY
+          value: admin123
+        ports:
+        - containerPort: {{ .Values.global.minio.port }}
+        # Mount the volume into the pod
+        volumeMounts:
+        - name: storage # must match the volume name, above
+          mountPath: "/storage"
