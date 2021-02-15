@@ -1,0 +1,160 @@
+apiVersion: v1
+items:
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      ingress.kubernetes.io/proxy-body-size: "0"
+      ingress.kubernetes.io/ssl-redirect: "true"
+      meta.helm.sh/release-name: harbor
+      meta.helm.sh/release-namespace: default
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    creationTimestamp: "2021-02-15T08:06:46Z"
+    generation: 1
+    labels:
+      app: harbor
+      app.kubernetes.io/managed-by: Helm
+      chart: harbor
+      heritage: Helm
+      release: harbor
+    managedFields:
+    - apiVersion: networking.k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:ingress.kubernetes.io/proxy-body-size: {}
+            f:ingress.kubernetes.io/ssl-redirect: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+            f:nginx.ingress.kubernetes.io/proxy-body-size: {}
+            f:nginx.ingress.kubernetes.io/ssl-redirect: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+        f:spec:
+          f:rules: {}
+          f:tls: {}
+      manager: Go-http-client
+      operation: Update
+      time: "2021-02-15T08:06:46Z"
+    - apiVersion: extensions/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      manager: traefik
+      operation: Update
+      time: "2021-02-15T08:06:47Z"
+    name: harbor-harbor-ingress-notary
+    namespace: default
+    resourceVersion: "1354048"
+    uid: a76d3e80-5bbb-4f5b-933c-7058c061af07
+  spec:
+    rules:
+    - host: notary.harbor.domain
+      http:
+        paths:
+        - backend:
+            service:
+              name: harbor-harbor-notary-server
+              port:
+                number: 4443
+          path: /
+          pathType: ImplementationSpecific
+    tls:
+    - hosts:
+      - notary.harbor.domain
+      secretName: harbor-harbor-ingress
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 172.16.31.235
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      ingress.kubernetes.io/proxy-body-size: "0"
+      ingress.kubernetes.io/ssl-redirect: "true"
+      meta.helm.sh/release-name: harbor
+      meta.helm.sh/release-namespace: default
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    creationTimestamp: "2021-02-15T08:06:46Z"
+    generation: 1
+    labels:
+      app: harbor
+      app.kubernetes.io/managed-by: Helm
+      chart: harbor
+      heritage: Helm
+      release: harbor
+    managedFields:
+    - apiVersion: networking.k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:ingress.kubernetes.io/proxy-body-size: {}
+            f:ingress.kubernetes.io/ssl-redirect: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+            f:nginx.ingress.kubernetes.io/proxy-body-size: {}
+            f:nginx.ingress.kubernetes.io/ssl-redirect: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+        f:spec:
+          f:rules: {}
+          f:tls: {}
+      manager: Go-http-client
+      operation: Update
+      time: "2021-02-15T08:06:46Z"
+    - apiVersion: extensions/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      manager: traefik
+      operation: Update
+      time: "2021-02-15T08:06:47Z"
+    name: harbor-harbor-ingress-notary
+    namespace: default
+    resourceVersion: "1354048"
+    uid: a76d3e80-5bbb-4f5b-933c-7058c061af07
+  spec:
+    rules:
+    - host: notary.harbor.domain
+      http:
+        paths:
+        - backend:
+            service:
+              name: harbor-harbor-notary-server
+              port:
+                number: 4443
+          path: /
+          pathType: ImplementationSpecific
+    tls:
+    - hosts:
+      - notary.harbor.domain
+      secretName: harbor-harbor-ingress
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 172.16.31.235
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
