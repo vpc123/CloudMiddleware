@@ -3,17 +3,17 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: traefik
   hosts:
-    - drone.kak.com
+    - rainbow-drone.vpc123.xyz
 
 sourceControl:
-  provider: gogs
-  gogs:
-    server: http://gogs.kakj.com
-#  github:
-#    clientID: 9f949ade4dce277e559b
-#    clientSecretKey: clientSecret
-#    clientSecretValue: 7dc3e96e973b6d07446d58b424ece3949fbadabb
-#    server: http://github.com
+  provider: github
+#  gogs:
+#    server: http://gogs.kakj.com
+  github:
+    clientID: 4c66c038e8dc7a507de5
+    clientSecretKey: vpc123
+    clientSecretValue: db2f0c975799769ebfc9e6545c2042324c8e6060
+    server: http://github.com
 
 service:
   httpPort: 8082
@@ -25,7 +25,7 @@ server:
   kubernetes:
     ## set to true if you want drone to use kubernetes to run pipelines
     enabled: true
-  host: drone.kak.com
+  host: rainbow-drone.vpc123.xyz
   protocol: http
 
 persistence:
