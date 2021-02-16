@@ -5,7 +5,12 @@ metadata:
   namespace: {{ .Release.Namespace }}
   annotations:
     kubernetes.io/ingress.class: traefik
+    kubernetes.io/tls-acme: 'true'
 spec:
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host }}
+    secretName: k8sui-tls
   rules:
   - host: {{ .Values.ingress.host }}
     http:

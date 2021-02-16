@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kube-ui
+  namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+  - hosts:
+    - k8sui.qikqiak.com
+    secretName: k8sui-tls
+  rules:
+  - host: k8sui.qikqiak.com
+    http:
+      paths:
+      - path: '/'
+        backend:
+          serviceName: kubernetes-dashboard
+          servicePort: 443
