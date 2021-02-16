@@ -36,7 +36,8 @@ nodeSelector: {}
 
 ingressShim:
   enabled: true
-
+  defaultIssuerName: letsencrypt-prod
+  defaultIssuerKind: ClusterIssuer
   # Optional additional arguments for ingress-shim
   extraArgs: []
 
